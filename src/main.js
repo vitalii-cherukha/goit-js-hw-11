@@ -11,7 +11,7 @@ import {
 
 const refs = {
   searchForm: document.querySelector('.js-search-form'),
-  galleryList: document.querySelector('.js-gallery'),
+  galleryList: document.querySelector('.gallery'),
   loader: document.querySelector('.loader'),
 };
 
