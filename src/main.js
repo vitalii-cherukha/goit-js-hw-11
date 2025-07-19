@@ -1,6 +1,4 @@
-import SimpleLightbox from 'simplelightbox';
 import iziToast from 'izitoast';
-import axios, { isCancel, AxiosError } from 'axios';
 import { getImagesByQuery } from './js/pixabay-api';
 import {
   createGallery,
@@ -18,17 +16,15 @@ const refs = {
 const onSearchFormSubmit = e => {
   e.preventDefault();
   clearGallery();
-  showLoader();
   const searchValue = e.target.elements['search-text'].value.trim();
   if (searchValue === '') {
     iziToast.error({
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
+      message: 'The input field must be filled in!',
       position: 'topRight',
     });
-    searchValue;
     return;
   }
+  showLoader();
   getImagesByQuery(searchValue)
     .then(({ hits }) => {
       if (hits.length === 0) {
@@ -42,7 +38,9 @@ const onSearchFormSubmit = e => {
       createGallery(hits);
     })
     .catch(err => {
-      console.log(err);
+      iziToast.error({
+        message: `Error: ${err}`,
+      });
     })
     .finally(() => {
       hideLoader();
