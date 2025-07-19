@@ -40,6 +40,7 @@ const onSearchFormSubmit = e => {
     .catch(err => {
       iziToast.error({
         message: `Error: ${err}`,
+        position: 'topRight',
       });
     })
     .finally(() => {
